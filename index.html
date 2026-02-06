@@ -1,43 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Instant UNLI Panel</title>
-  <link rel="stylesheet" href="/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danz | LinkTree</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-  <div class="bg"></div>
-  <main class="wrap">
-    <header class="top">
-      <div class="brand">
-        <div class="logo">P</div>
-        <div>
-          <h1>Instant Panel UNLI</h1>
-          <p>Ketik username, klik tombol, akun + server langsung jadi.</p>
-        </div>
-      </div>
-      <div class="pill">READY</div>
-    </header>
-    <section class="grid">
-      <div class="card">
-        <h2>Create User</h2>
-        <label class="lbl">Token</label>
-        <input id="token" class="inp" placeholder="Masukan token" />
-        <label class="lbl">Username</label>
-        <input id="username" class="inp" placeholder="rizkydep" />
-        <button id="btn" class="btn">Buat Sekarang (UNLI)</button>
-        <div class="hint">
-          <div>• Password auto: <span class="mono">username001</span></div>
-          <div>• Resource: RAM/Disk/CPU unlimited</div>
-        </div>
-      </div>
-      <div class="card">
-        <h2>Output</h2>
-        <pre id="out" class="result">Belum ada proses.</pre>
-      </div>
-    </section>
-  </main>
-  <script src="/app.js"></script>
+    <div class="bg-animation"></div>
+    <div class="container">
+        <header data-aos="zoom-in">
+            <div class="profile-img">
+                <img src="https://telegra.ph/file/0c9f1307b22d10f44f9f4.jpg" alt="Foto">
+            </div>
+            <h1>DANZ</h1>
+            <p>Developer & Provider Panel</p>
+        </header>
+
+        <nav class="links">
+            <a href="create.html" class="btn-link" data-aos="fade-up" data-aos-delay="100">
+                <span class="icon">🚀</span> CREATE PANEL
+            </a>
+            <a href="https://wa.me/628xxx" class="btn-link" data-aos="fade-up" data-aos-delay="200">
+                <span class="icon">💬</span> WHATSAPP
+            </a>
+            <a href="#" class="btn-link" data-aos="fade-up" data-aos-delay="300">
+                <span class="icon">🎥</span> TIKTOK
+            </a>
+            <a href="#" class="btn-link" data-aos="fade-up" data-aos-delay="400">
+                <span class="icon">ℹ️</span> INFO
+            </a>
+        </nav>
+
+        <footer data-aos="fade-in" data-aos-delay="600">
+            <div class="info-box">
+                <p>Website ini adalah tempat buat panel otomatis. Pilih spek sesuai kebutuhanmu!</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
 </body>
 </html>

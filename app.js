@@ -1,43 +1,38 @@
-const $ = s => document.querySelector(s);
+document.getElementById('btn-create')?.addEventListener('click', async () => {
+    const username = document.getElementById('username').value;
+    const token = document.getElementById('token').value;
+    const ram = document.getElementById('ram').value;
+    const btn = document.getElementById('btn-create');
+    const out = document.getElementById('output');
+    const loader = document.getElementById('loader');
 
-function clean(u) {
-  u = String(u || "").trim().toLowerCase();
-  u = u.replace(/[^a-z0-9_]/g, "");
-  return u;
-}
+    if (!username || !token) return alert("Isi semua field!");
 
-$("#btn").addEventListener("click", async () => {
-  const username = clean($("#username").value);
-  const token = String($("#token").value || "").trim();
-  const btn = $("#btn");
+    btn.classList.add('hidden');
+    loader.classList.remove('hidden');
+    out.classList.add('hidden');
 
-  if (!username) return alert("Username kosong");
+    try {
+        const response = await fetch('/api/create', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, token, ram })
+        });
 
-  btn.disabled = true;
-  btn.textContent = "Processing...";
-  $("#out").textContent = "Memproses...";
+        const data = await response.json();
 
-  try {
-    const r = await fetch("/api/create", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, token })
-    });
+        loader.classList.add('hidden');
+        btn.classList.remove('hidden');
+        out.classList.remove('hidden');
 
-    const j = await r.json().catch(() => ({}));
-
-    if (!r.ok || !j.ok) {
-      $("#out").textContent = `GAGAL\n\n${j.message || "Unknown error"}`;
-      return;
+        if (data.ok) {
+            out.textContent = `✅ BERHASIL!\n\nUser: ${data.result.username}\nPass: ${data.result.password}\nRAM: ${ram === '0' ? 'Unlimited' : ram + 'MB'}\nURL: ${data.result.panel}`;
+        } else {
+            out.textContent = `❌ GAGAL: ${data.message}`;
+        }
+    } catch (e) {
+        alert("Koneksi gagal");
+        btn.classList.remove('hidden');
+        loader.classList.add('hidden');
     }
-
-    const x = j.result;
-    $("#out").textContent = `BERHASIL ✅\n\nPANEL: ${x.panel}\nSERVER ID: ${x.server_id}\n\nUSERNAME: ${x.username}\nPASSWORD: ${x.password}\nCREATED: ${x.created}\n\nSPEK SERVER\nRAM: ${x.ram}\nDISK: ${x.disk}\nCPU: ${x.cpu}`;
-
-  } catch (err) {
-    $("#out").textContent = "Error Connection";
-  } finally {
-    btn.disabled = false;
-    btn.textContent = "Buat Sekarang (UNLI)";
-  }
 });
